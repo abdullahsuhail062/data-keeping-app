@@ -1,0 +1,19 @@
+.form-container {
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.custom-button {
+    width: 150px;
+    border-radius: 20px;
+}
+
+.custom-button :hover {
+    background-color: blue;
+}
+
+
