@@ -21,23 +21,16 @@ export class AppComponent {
   usernameError: any
   emailError: any
   passwordError: any
-
-
-
+  
   constructor(private http: HttpClient){
-    this.signUpForm = new FormGroup({username: new FormControl('',[Validators.required, Validators.minLength(3)]), email: new FormControl('',[Validators.required,Validators.pattern('^[a-zA-Z0-9._%+-]+@example\.com$'),Validators.email]),password: new FormControl('',[Validators.required,Validators.minLength(8),Validators.pattern('^(?=.*[A-Za-z])(?=.*\\d)(?=.*[!@#$%^&*])[A-Za-z\\d!@#$%^&*]{8,}$')])})
-  }
-
-
-
+    this.signUpForm = new FormGroup({username: new FormControl('',[Validators.required, Validators.minLength(3)]), email: new FormControl('',[Validators.required,Validators.pattern('^[a-zA-Z0-9._%+-]+@example\.com$'),Validators.email]),password: new FormControl('',[Validators.required,Validators.minLength(8),Validators.pattern('^(?=.*[A-Za-z])(?=.*\\d)(?=.*[!@#$%^&*])[A-Za-z\\d!@#$%^&*]{8,}$')])})}
 
   submitForm(){
     const username = this.signUpForm.get('username')?.value
     const email = this.signUpForm.get('email')?.value   
     const password = this.signUpForm.get('password')?.value
-      this.http.post('http://localhost:3000/api/registerUser',{username,email,password},{responseType: 'json'}).
-      subscribe({next: (response)=> {{console.log(response);
-      }
+      this.http.post('http://server-app-chi.vercel.app/api/registerUser',{username,email,password},{responseType: 'json'}).
+      subscribe({next: (response)=> {{console.log(response);}
       },error: (err)=>{
         console.log(err);
         
