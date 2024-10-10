@@ -36,7 +36,7 @@ export class AppComponent {
     const username = this.signUpForm.get('username')?.value
     const email = this.signUpForm.get('email')?.value   
     const password = this.signUpForm.get('password')?.value
-      this.http.post(`${apiUrl}api/registerUser`,{username,email,password},{responseType: 'json'}).
+      this.http.post(`${apiUrl}/api/registerUser`,{username,email,password},{responseType: 'json'}).
       subscribe({next: (response)=> {{console.log(response);}
       },error: (err)=>{
         console.log(err);
