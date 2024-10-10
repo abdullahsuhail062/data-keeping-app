@@ -7,6 +7,7 @@ HttpResponse
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { env } from 'node:process';
+import { environment } from '../environments/environment.prod';
 
 
 
@@ -23,21 +24,19 @@ export class AppComponent {
   usernameError: any
   emailError: any
   passwordError: any
-   environment = {
-    production: true,
-    apiUrl: 'https://server-app-chi.vercel.app/' // Change to your actual backend URL
-  };
+   
   
-    apiUrl = this.environment.apiUrl
   
   constructor(private http: HttpClient){
     this.signUpForm = new FormGroup({username: new FormControl('',[Validators.required, Validators.minLength(3)]), email: new FormControl('',[Validators.required,Validators.pattern('^[a-zA-Z0-9._%+-]+@example\.com$'),Validators.email]),password: new FormControl('',[Validators.required,Validators.minLength(8),Validators.pattern('^(?=.*[A-Za-z])(?=.*\\d)(?=.*[!@#$%^&*])[A-Za-z\\d!@#$%^&*]{8,}$')])})}
 
   submitForm(){
+   const apiUrl = environment.apiUrl
+
     const username = this.signUpForm.get('username')?.value
     const email = this.signUpForm.get('email')?.value   
     const password = this.signUpForm.get('password')?.value
-      this.http.post(`${this.apiUrl}/api/registerUser`,{username,email,password},{responseType: 'json'}).
+      this.http.post(`${apiUrl}/api/registerUser`,{username,email,password},{responseType: 'json'}).
       subscribe({next: (response)=> {{console.log(response);}
       },error: (err)=>{
         console.log(err);
